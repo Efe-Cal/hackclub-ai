@@ -28,6 +28,26 @@ export async function getUserStats(userId: string): Promise<Stats> {
   return stats || defaultStats;
 }
 
+export async function getApiKeyStats(
+  apiKeyId: string,
+  userId: string,
+): Promise<Stats> {
+  const [stats] = await Sentry.startSpan(
+    { name: "db.select.apiKeyStats" },
+    () =>
+      db
+        .select(statsSelect)
+        .from(requestLogs)
+        .where(
+          and(
+            eq(requestLogs.apiKeyId, apiKeyId),
+            eq(requestLogs.userId, userId),
+          ),
+        ),
+  );
+  return stats || defaultStats;
+}
+
 export async function getGlobalStats(): Promise<Stats> {
   const [stats] = await Sentry.startSpan(
     { name: "db.select.globalStats" },
