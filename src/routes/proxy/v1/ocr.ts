@@ -40,10 +40,10 @@ const validateDocument = (doc: unknown): doc is OCRDocument => {
   if (!doc || typeof doc !== "object") return false;
   const d = doc as Record<string, unknown>;
   if (d.type === "image_url" && typeof d.image_url === "string") {
-    return d.image_url.startsWith("https://");
+    return d.image_url.startsWith("https://") || /^data:image\/[^;]+;base64,/.test(d.image_url);
   }
   if (d.type === "document_url" && typeof d.document_url === "string") {
-    return d.document_url.startsWith("https://");
+    return d.document_url.startsWith("https://") || /^data:[^;]+;base64,/.test(d.document_url);
   }
   if (d.type === "file" && typeof d.file_id === "string") {
     return d.file_id.length > 0;
@@ -97,7 +97,7 @@ ocr.post(
     if (!validateDocument(body.document)) {
       throw new HTTPException(400, {
         message:
-          "Invalid document. Provide a valid document with type 'image_url', 'document_url', or 'file'. URLs must use HTTPS.",
+          "Invalid document. Provide a valid document with type 'image_url', 'document_url', or 'file'. URLs must use HTTPS or be valid base64-encoded data URIs.",
       });
     }
 
