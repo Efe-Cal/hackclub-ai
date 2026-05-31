@@ -1,3 +1,4 @@
+import { formatPrice } from "../lib/price";
 import type { DashboardRequestLog, Stats, User } from "../types";
 import { EmptyState } from "./components/EmptyState";
 import { Header } from "./components/Header";
@@ -140,6 +141,9 @@ const RecentRequestsTable = ({
                 Tokens
               </th>
               <th class="text-left py-4 px-4 font-bold text-sm text-brand-heading uppercase tracking-wider">
+                Cost
+              </th>
+              <th class="text-left py-4 px-4 font-bold text-sm text-brand-heading uppercase tracking-wider">
                 Result
               </th>
             </tr>
@@ -199,6 +203,13 @@ export const RecentRequestsRows = ({
                   {row.promptTokens.toLocaleString()} in /{" "}
                   {row.completionTokens.toLocaleString()} out
                 </span>
+              )}
+            </td>
+            <td class="py-2 px-4 text-sm text-brand-text font-medium whitespace-nowrap">
+              {errorMessage ? (
+                <span class="text-brand-text/60">-</span>
+              ) : (
+                <span>{formatPrice(row.cost)}</span>
               )}
             </td>
             <td class="py-2 px-4 text-sm font-medium whitespace-nowrap">

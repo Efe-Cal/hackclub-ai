@@ -14,6 +14,7 @@ export type DashboardRequestLog = Pick<
   | "duration"
   | "ip"
   | "response"
+  | "cost"
 > & {
   apiKeyName: string;
   modelName: string;

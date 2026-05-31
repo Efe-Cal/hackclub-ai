@@ -47,6 +47,7 @@ const getRecentLogs = async (
         duration: requestLogs.duration,
         ip: requestLogs.ip,
         response: requestLogs.response,
+        cost: requestLogs.cost,
         apiKeyName: apiKeys.name,
       })
       .from(requestLogs)
