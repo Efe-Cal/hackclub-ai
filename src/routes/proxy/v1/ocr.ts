@@ -40,10 +40,16 @@ const validateDocument = (doc: unknown): doc is OCRDocument => {
   if (!doc || typeof doc !== "object") return false;
   const d = doc as Record<string, unknown>;
   if (d.type === "image_url" && typeof d.image_url === "string") {
-    return d.image_url.startsWith("https://") || /^data:image\/[^;]+;base64,/.test(d.image_url);
+    return (
+      d.image_url.startsWith("https://") ||
+      /^data:image\/[^;]+;base64,/.test(d.image_url)
+    );
   }
   if (d.type === "document_url" && typeof d.document_url === "string") {
-    return d.document_url.startsWith("https://") || /^data:[^;]+;base64,/.test(d.document_url);
+    return (
+      d.document_url.startsWith("https://") ||
+      /^data:[^;]+;base64,/.test(d.document_url)
+    );
   }
   if (d.type === "file" && typeof d.file_id === "string") {
     return d.file_id.length > 0;

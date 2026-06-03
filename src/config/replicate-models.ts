@@ -76,7 +76,7 @@ export const replicateCategories: ReplicateCategoryConfig[] = [
     name: "Audio",
     models: [
       { id: "geopti/sam-audio-large", costPerRequest: 0.07 },
-      { id: "minimax/voice-cloning", costPerRequest: 3.00 },
+      { id: "minimax/voice-cloning", costPerRequest: 3.0 },
     ],
   },
 ];

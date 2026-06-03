@@ -8,10 +8,7 @@ export const AgentBanner = () => {
     >
       <div class="max-w-7xl mx-auto px-4 py-4">
         <div class="flex items-center gap-4">
-          <Warning
-            class="w-6 h-6 text-amber-600 flex-shrink-0"
-            aria-hidden
-          />
+          <Warning class="w-6 h-6 text-amber-600 flex-shrink-0" aria-hidden />
           <div class="flex-1">
             <h3 class="text-sm font-semibold text-amber-900">
               Not for AI coding agents

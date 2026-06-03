@@ -117,15 +117,12 @@ api.get("/keys/partial", async (c) => {
 api.post("/dismiss-agent-banner", async (c) => {
   const user = c.get("user");
 
-  await Sentry.startSpan(
-    { name: "db.update.dismissAgentBanner" },
-    async () => {
-      await db
-        .update(users)
-        .set({ agentBannerDismissedAt: new Date() })
-        .where(eq(users.id, user.id));
-    },
-  );
+  await Sentry.startSpan({ name: "db.update.dismissAgentBanner" }, async () => {
+    await db
+      .update(users)
+      .set({ agentBannerDismissedAt: new Date() })
+      .where(eq(users.id, user.id));
+  });
 
   return c.body(null);
 });
